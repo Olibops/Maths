@@ -48,3 +48,73 @@ def inefficient_create_N_pythagorean_triples(N=1):
     print("Here are the first " + str(N) + " Pythagorean Triples")
     for i in range(N):
         print(triples[i])
+        
+def euclidean_algorithm(M=2,N=1,Show_Working="No"):
+    a_n,b_n=max(M,N),min(M,N)
+    
+    while b_n>0:
+        q_n = a_n // b_n
+        r_n = a_n- q_n * b_n
+        if Show_Working == "Yes":
+            print(str(a_n)+"="+str(q_n)+"x"+str(b_n)+"+"+str(r_n))
+        a_n = b_n
+        b_n = r_n
+    if Show_Working == "Yes":
+        print("GCD(" + str(M) + "," + str(N) + ")=" + str(a_n))
+
+    return a_n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
