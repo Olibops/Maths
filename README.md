@@ -12,3 +12,7 @@ Prints the first "N" Pythagorean triples by checking every triple until "N" trip
 euclidean_algorithm(M,N,Show_Working)
 
 Calculates and returns the GCD of M,N via the Euclidean algorithm, if Show_Working="Yes" it will show the method.
+
+least_common_multiple(N,M,Show_Working)
+
+Calculates and returns the LCM of M,N via the Euclidean algorithm, if Show_Working="Yes" it will show the method.

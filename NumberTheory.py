@@ -65,7 +65,16 @@ def euclidean_algorithm(M=2,N=1,Show_Working="No"):
     return a_n
 
 
-
+def least_common_multiple(N=1,M=2,Show_Working="No"):
+    if Show_Working == "Yes":
+        print("First we calculate GCD(" + str(M) + "," + str(N) + ") with the Euclidean Algorithm")
+    GCD = euclidean_algorithm(N,M,Show_Working)
+    LCM = int ( M * N / GCD )
+    if Show_Working == "Yes":
+        print("Therefore LCM(" + str(M) + "," + str(N) + ")" +  "=" + str(M) + "x" + str(N) + "/GCD(" + str(M) + "," + str(N) + ")=" + str(M) + "x" + str(N) + "/" + str(GCD) + "=" + str(M*N))
+    else:
+        print(LCM)
+    return LCM
 
 
 
