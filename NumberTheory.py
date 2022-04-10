@@ -49,7 +49,7 @@ def inefficient_create_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
-#GCD algorithms, all return GCD at minimum.
+#GCD algorithms, EA, , , return GCD, EEA returns bezout identity as a list
 
 def euclidean_algorithm(M=2,N=1,Show_Working="No"): #Returns GCD
     a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
@@ -66,6 +66,8 @@ def euclidean_algorithm(M=2,N=1,Show_Working="No"): #Returns GCD
 
     return a_n
 
+#Corollaries from GCDs
+
 def least_common_multiple(N=1,M=2,Show_Working="No"):
     if Show_Working == "Yes":
         print("First we calculate GCD(" + str(M) + "," + str(N) + ") with the Euclidean Algorithm")
@@ -77,6 +79,24 @@ def least_common_multiple(N=1,M=2,Show_Working="No"):
         print(LCM)
     return LCM
 
+def linear_diophantine(a=1,b=1,c=1,Show_Working="Yes"): #Not finished
+    #Find x,y such that ax+by=c
+    if Show_Working=="Yes":
+        print("First we calculate the GCD of " + str(a) + " and " + str(b) + " with the Euclidean Algorithm")
+        GCD = euclidean_algorithm(a,b,"Yes")
+    else:
+        GCD = euclidean_algorithm(a,b)
+    Solveable = c % GCD
+    if Solveable == 0:
+        if Show_Working=="Yes":
+            print("Therefore " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is solveable because " + str(GCD) + "|" + str(c) )
+        else:
+            print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is solveable because " + str(GCD) + "|" + str(c) )
+    else:
+        if Show_Working=="Yes":
+            print("Therefore " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
+        else:
+            print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
 
 
 
