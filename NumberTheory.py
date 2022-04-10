@@ -23,7 +23,14 @@ def create_N_pythagorean_triples(N=1):
     print("Here are the first " + str(N) + " Pythagorean Triples")
     for i in range(N):
         print(Storage_List[i])
-    
+
+def sign(X):
+    if X == 0:
+        Sign=0
+    else:
+        Sign = int(abs(X)//X)
+    return Sign
+
 def inefficient_create_N_pythagorean_triples(N=1):
     def pythagorean_triple_search(N=1):
         Storage_List=[]
@@ -67,7 +74,10 @@ def euclidean_algorithm(M=2,N=1,Show_Working="No"): #Returns GCD
     return a_n
 
 def extended_euclidean_algorithm(N=1,M=2,Show_Working="No"):
-   
+
+    N_sign = sign(N)
+    M_sign = sign(M)
+
     a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
 
     Bezout_a = [1,0]
@@ -97,16 +107,19 @@ def extended_euclidean_algorithm(N=1,M=2,Show_Working="No"):
         a_n = b_n
         b_n = r_n
 
-    if Show_Working == "Yes" and Bezout_a[0] >= 0:
-        print("Therefore GCD(" + str(M) + "," + str(N) + ") = " + str(a_n) + " = " + str(Bezout_a[-2]) + "x" + str(min(abs(M),abs(N))) + " + " + str(Bezout_b[-2]) + "x" + str(max(abs(M),abs(N)))  )
-    
-    if Show_Working == "Yes" and Bezout_a[0] < 0:
-        print("Therefore GCD(" + str(M) + "," + str(N) + ") = " + str(a_n) + " = " + str(Bezout_b[-2]) + "x" + str(min(abs(M),abs(N))) + " + " + str(Bezout_a[-2]) + "x" + str(max(abs(M),abs(N)))  )
+    if abs(N) >= abs(M):
+        
+        if Show_Working == "Yes":
+            print("Therefore GCD(" + str(N) + "," + str(M) + ") = " + str(a_n) + " = " + str( N_sign * Bezout_a[-2]) + "x" + str(N) + " + " + str( M_sign * Bezout_b[-2]) + "x" + str(M) )
+       
+        return [a_n, N_sign * Bezout_a[-2], M_sign * Bezout_b[-2]]
 
-    if N >= M:
-        return [a_n,Bezout_a[-2],Bezout_b[-2]]
-    if N < M:
-        return [a_n,Bezout_b[-2],Bezout_a[-2]]
+    else:
+
+        if Show_Working == "Yes":
+            print("Therefore GCD(" + str(N) + "," + str(M) + ") = " + str(a_n) + " = " + str( M_sign * Bezout_a[-2]) + "x" + str(M) + " + " + str( N_sign * Bezout_b[-2]) + "x" + str(N) )
+
+        return [a_n, N_sign * Bezout_b[-2], M_sign * Bezout_a[-2]]
 
 #Corollaries from GCDs
 
@@ -120,6 +133,33 @@ def least_common_multiple(N=1,M=2,Show_Working="No"):
     else:
         print(LCM)
     return LCM
+
+def linear_diophantine(a=1,b=1,c=1,Show_Working="No"): #Not finished
+    #Find x,y such that ax+by=c
+    if Show_Working=="Yes":
+        print("First we calculate the GCD, and Bezout Identities of " + str(abs(a)) + " and " + str(abs(b)) + " with the Euclidean Algorithm")
+        GCD_Bezout= extended_euclidean_algorithm(a,b,Show_Working)
+    else:
+        GCD_Bezout = extended_euclidean_algorithm(a,b)
+    GCD=GCD_Bezout[0]
+    Solveable = c % GCD
+    if Solveable == 0:
+
+        multiplier=c // GCD
+        X_Y=[ multiplier * GCD_Bezout[1], multiplier * GCD_Bezout[2]]
+
+        if Show_Working=="Yes":
+            print("Thus " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is solveable because " + str(GCD) + "|" + str(c) )
+            print("As " + str(c) + " = " + str(multiplier) + "x" + str(GCD) +" = " + str(multiplier * GCD_Bezout[1]) + "x" + str(a) + " + " + str(multiplier * GCD_Bezout[2]) + "x" + str(b) + " we have the particular solution (x,y)" + " = (" + str(X_Y[0]) + ", " + str(X_Y[1]) + ")" )        
+
+        return X_Y
+    else:
+        if Show_Working=="Yes":
+            print("Thus " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
+        else:
+            print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
+
+
 
 
 

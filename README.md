@@ -3,6 +3,10 @@ Place to put maths projects and that
 
 NumberTheory.py
 
+Sign(X)
+
+Returns the sign.
+
 create_N_pythagorean_triples(N)
 
 Prints the first "N" Pythagorean triples by calculating them using a formula, works fairly quickly.
@@ -26,3 +30,7 @@ Corollaries from GCD algorithms
 least_common_multiple(N,M,Show_Working)
 
 Calculates and returns the LCM of M,N via the Euclidean algorithm, if Show_Working="Yes" it will show the method.
+
+linear_diophantine(a,b,c,Show_Working): 
+
+Solves equations of form ax+by=c and gives particular solution in form \[x,y\].
