@@ -66,6 +66,48 @@ def euclidean_algorithm(M=2,N=1,Show_Working="No"): #Returns GCD
 
     return a_n
 
+def extended_euclidean_algorithm(N=1,M=2,Show_Working="No"):
+   
+    a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
+
+    Bezout_a = [1,0]
+    Bezout_b = [0,1]
+
+    step_counter=0
+    workings_length=0
+
+    while b_n>0:
+        q_n = a_n // b_n
+        r_n = a_n- q_n * b_n
+
+        Bezout_a = Bezout_a + [Bezout_a[-2] - q_n * Bezout_a[-1]]
+        Bezout_b = Bezout_b + [ Bezout_b[-2] - q_n * Bezout_b[-1]]
+
+        workings=str(a_n)+"="+str(q_n)+"x"+str(b_n)+"+"+str(r_n)
+        workings_length = max(workings_length,len(workings))
+
+        if Show_Working == "Yes":
+            if step_counter == 0: 
+                print( ( workings_length + 10 ) * " " + str(Bezout_a[0]) + ", " + str(Bezout_b[0]))
+                print( ( workings_length + 10 ) * " " + str(Bezout_a[1]) + ", " + str(Bezout_b[1]))
+            
+            print(workings + ( workings_length - len(workings ) + 10 ) * " " + str(Bezout_a[-1]) + ", " + str(Bezout_b[-1]) )
+        
+        step_counter+=1
+        a_n = b_n
+        b_n = r_n
+
+    if Show_Working == "Yes" and Bezout_a[0] >= 0:
+        print("Therefore GCD(" + str(M) + "," + str(N) + ") = " + str(a_n) + " = " + str(Bezout_a[-2]) + "x" + str(min(abs(M),abs(N))) + " + " + str(Bezout_b[-2]) + "x" + str(max(abs(M),abs(N)))  )
+    
+    if Show_Working == "Yes" and Bezout_a[0] < 0:
+        print("Therefore GCD(" + str(M) + "," + str(N) + ") = " + str(a_n) + " = " + str(Bezout_b[-2]) + "x" + str(min(abs(M),abs(N))) + " + " + str(Bezout_a[-2]) + "x" + str(max(abs(M),abs(N)))  )
+
+    if N >= M:
+        return [a_n,Bezout_a[-2],Bezout_b[-2]]
+    if N < M:
+        return [a_n,Bezout_b[-2],Bezout_a[-2]]
+
 #Corollaries from GCDs
 
 def least_common_multiple(N=1,M=2,Show_Working="No"):
@@ -79,24 +121,6 @@ def least_common_multiple(N=1,M=2,Show_Working="No"):
         print(LCM)
     return LCM
 
-def linear_diophantine(a=1,b=1,c=1,Show_Working="Yes"): #Not finished
-    #Find x,y such that ax+by=c
-    if Show_Working=="Yes":
-        print("First we calculate the GCD of " + str(a) + " and " + str(b) + " with the Euclidean Algorithm")
-        GCD = euclidean_algorithm(a,b,"Yes")
-    else:
-        GCD = euclidean_algorithm(a,b)
-    Solveable = c % GCD
-    if Solveable == 0:
-        if Show_Working=="Yes":
-            print("Therefore " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is solveable because " + str(GCD) + "|" + str(c) )
-        else:
-            print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is solveable because " + str(GCD) + "|" + str(c) )
-    else:
-        if Show_Working=="Yes":
-            print("Therefore " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
-        else:
-            print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
 
 
 
