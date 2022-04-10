@@ -48,9 +48,11 @@ def inefficient_create_N_pythagorean_triples(N=1):
     print("Here are the first " + str(N) + " Pythagorean Triples")
     for i in range(N):
         print(triples[i])
-        
-def euclidean_algorithm(M=2,N=1,Show_Working="No"):
-    a_n,b_n=max(M,N),min(M,N)
+
+#GCD algorithms, all return GCD at minimum.
+
+def euclidean_algorithm(M=2,N=1,Show_Working="No"): #Returns GCD
+    a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
     
     while b_n>0:
         q_n = a_n // b_n
@@ -63,7 +65,6 @@ def euclidean_algorithm(M=2,N=1,Show_Working="No"):
         print("GCD(" + str(M) + "," + str(N) + ")=" + str(a_n))
 
     return a_n
-
 
 def least_common_multiple(N=1,M=2,Show_Working="No"):
     if Show_Working == "Yes":
