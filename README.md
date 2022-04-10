@@ -1,6 +1,8 @@
 # Maths 
 Place to put maths projects and that
 
+NumberTheory.py
+
 create_N_pythagorean_triples(N)
 
 Prints the first "N" Pythagorean triples by calculating them using a formula, works fairly quickly.
