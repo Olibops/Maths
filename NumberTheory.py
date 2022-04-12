@@ -58,22 +58,22 @@ def inefficient_create_N_pythagorean_triples(N=1):
 
 #GCD algorithms, EA, , , return GCD, EEA returns bezout identity as a list
 
-def euclidean_algorithm(M=2,N=1,Show_Working="No"): #Returns GCD
+def euclidean_algorithm(M=2,N=1,Show_Working=False): #Returns GCD
     a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
     
     while b_n>0:
         q_n = a_n // b_n
         r_n = a_n- q_n * b_n
-        if Show_Working == "Yes":
+        if Show_Working == True:
             print(str(a_n)+"="+str(q_n)+"x"+str(b_n)+"+"+str(r_n))
         a_n = b_n
         b_n = r_n
-    if Show_Working == "Yes":
+    if Show_Working == True:
         print("GCD(" + str(M) + "," + str(N) + ")=" + str(a_n))
 
     return a_n
 
-def extended_euclidean_algorithm(N=1,M=2,Show_Working="No"):
+def extended_euclidean_algorithm(N=1,M=2,Show_Working=False):
 
     N_sign = sign(N)
     M_sign = sign(M)
@@ -96,7 +96,7 @@ def extended_euclidean_algorithm(N=1,M=2,Show_Working="No"):
         workings=str(a_n)+"="+str(q_n)+"x"+str(b_n)+"+"+str(r_n)
         workings_length = max(workings_length,len(workings))
 
-        if Show_Working == "Yes":
+        if Show_Working == True:
             if step_counter == 0: 
                 print( ( workings_length + 10 ) * " " + str(Bezout_a[0]) + ", " + str(Bezout_b[0]))
                 print( ( workings_length + 10 ) * " " + str(Bezout_a[1]) + ", " + str(Bezout_b[1]))
@@ -109,34 +109,34 @@ def extended_euclidean_algorithm(N=1,M=2,Show_Working="No"):
 
     if abs(N) >= abs(M):
         
-        if Show_Working == "Yes":
+        if Show_Working == True:
             print("Therefore GCD(" + str(N) + "," + str(M) + ") = " + str(a_n) + " = " + str( N_sign * Bezout_a[-2]) + "x" + str(N) + " + " + str( M_sign * Bezout_b[-2]) + "x" + str(M) )
        
         return [a_n, N_sign * Bezout_a[-2], M_sign * Bezout_b[-2]]
 
     else:
 
-        if Show_Working == "Yes":
+        if Show_Working == True:
             print("Therefore GCD(" + str(N) + "," + str(M) + ") = " + str(a_n) + " = " + str( M_sign * Bezout_a[-2]) + "x" + str(M) + " + " + str( N_sign * Bezout_b[-2]) + "x" + str(N) )
 
         return [a_n, N_sign * Bezout_b[-2], M_sign * Bezout_a[-2]]
 
 #Corollaries from GCDs
 
-def least_common_multiple(N=1,M=2,Show_Working="No"):
-    if Show_Working == "Yes":
+def least_common_multiple(N=1,M=2,Show_Working=False):
+    if Show_Working == True:
         print("First we calculate GCD(" + str(M) + "," + str(N) + ") with the Euclidean Algorithm")
     GCD = euclidean_algorithm(N,M,Show_Working)
     LCM = int ( M * N / GCD )
-    if Show_Working == "Yes":
+    if Show_Working == True:
         print("Therefore LCM(" + str(M) + "," + str(N) + ")" +  "=" + str(M) + "x" + str(N) + "/GCD(" + str(M) + "," + str(N) + ")=" + str(M) + "x" + str(N) + "/" + str(GCD) + "=" + str(M*N))
     else:
         print(LCM)
     return LCM
 
-def linear_diophantine(a=1,b=1,c=1,Show_Working="No"): #Not finished
+def linear_diophantine(a=1,b=1,c=1,Show_Working=False): #Not finished
     #Find x,y such that ax+by=c
-    if Show_Working=="Yes":
+    if Show_Working==True:
         print("First we calculate the GCD, and Bezout Identities of " + str(abs(a)) + " and " + str(abs(b)) + " with the Euclidean Algorithm")
         GCD_Bezout= extended_euclidean_algorithm(a,b,Show_Working)
     else:
@@ -148,13 +148,13 @@ def linear_diophantine(a=1,b=1,c=1,Show_Working="No"): #Not finished
         multiplier=c // GCD
         X_Y=[ multiplier * GCD_Bezout[1], multiplier * GCD_Bezout[2]]
 
-        if Show_Working=="Yes":
+        if Show_Working==True:
             print("Thus " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is solveable because " + str(GCD) + "|" + str(c) )
             print("As " + str(c) + " = " + str(multiplier) + "x" + str(GCD) +" = " + str(multiplier * GCD_Bezout[1]) + "x" + str(a) + " + " + str(multiplier * GCD_Bezout[2]) + "x" + str(b) + " we have the particular solution (x,y)" + " = (" + str(X_Y[0]) + ", " + str(X_Y[1]) + ")" )        
 
         return X_Y
     else:
-        if Show_Working=="Yes":
+        if Show_Working==True:
             print("Thus " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
         else:
             print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
