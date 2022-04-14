@@ -154,12 +154,21 @@ def linear_diophantine(a=1,b=1,c=1,Show_Working=False): #Not finished
 
         return X_Y
     else:
+        return False
         if Show_Working==True:
             print("Thus " + str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
         else:
             print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
 
-
+def solve_linear_congruence(a=1,c=1,n=1,Show_Working=True): #aX=c mod n
+    if Show_Working==True:
+        print("To solve an modular congruence of the form " + str(a) + "X = " + str(c) + " mod " + str(n) + " note it can be rephrased as the linear Diophantine equation:")
+        print(str(a) + "X + " + str(-n) + "Y = " + str(c) )
+        print("which can be solved with the following method:")
+    
+    X=linear_diophantine(a,-n,c,Show_Working)
+    if X==False:
+        print("Therefore "+ str(a) + "X = " + str(c) + " mod " + str(n) + " is not solveable")
 
 
 
