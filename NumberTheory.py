@@ -56,7 +56,7 @@ def inefficient_create_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
-#GCD algorithms, EA, , , return GCD, EEA returns bezout identity as a list
+#GCD algorithms, EA, EEA, , return GCD, EEA also returns bezout identity as a list
 
 def euclidean_algorithm(M=2,N=1,Show_Working=False): #Returns GCD
     a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
