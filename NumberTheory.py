@@ -9,7 +9,7 @@ def sign(X):
 
 #Algorithms for finding "special numbers"
 
-def create_N_pythagorean_triples(N=1):
+def N_pythagorean_triples(N=1):
     
     for i in range(N + 1):
         if (1 + i) * i /2 >= N:
@@ -62,6 +62,17 @@ def brute_force_N_pythagorean_triples(N=1):
 
 #GCD algorithms, EA, EEA, , return GCD, EEA also returns bezout identity as a list
 
+def brute_force_GCD(X,Y,Show_working=True):
+
+    x=0
+
+    test_range=range(1, int(min(X,Y)) +1 )
+
+    for i in test_range:
+        if X % i == 0 and Y % i == 0:
+            x=i
+    print(x)
+
 def euclidean_algorithm(M=2,N=1,Show_Working=False): #Returns GCD
     a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
     
@@ -76,6 +87,7 @@ def euclidean_algorithm(M=2,N=1,Show_Working=False): #Returns GCD
         print("GCD(" + str(M) + "," + str(N) + ")=" + str(a_n))
 
     return a_n
+
 
 def extended_euclidean_algorithm(N=1,M=2,Show_Working=False):
 
@@ -124,6 +136,13 @@ def extended_euclidean_algorithm(N=1,M=2,Show_Working=False):
             print("Therefore GCD(" + str(N) + "," + str(M) + ") = " + str(a_n) + " = " + str( M_sign * Bezout_a[-2]) + "x" + str(M) + " + " + str( N_sign * Bezout_b[-2]) + "x" + str(N) )
 
         return [a_n, N_sign * Bezout_b[-2], M_sign * Bezout_a[-2]]
+
+def dijkstras_GCD(X,Y,Show_Working=False):
+    while X != Y:
+        X, Y = max(abs(X - Y),Y), min(abs(X - Y),Y)
+        if Show_Working == True:
+            print(X,Y)
+    print(X)
 
 #Corollaries from GCDs
 
