@@ -60,6 +60,18 @@ def brute_force_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
+def N_fibonacchi(N,estimate_G_ratio=True):
+    list=[1,1]
+    G_list=[]
+    for i in range(N):
+        list = list + [ list[-1] + list[-2] ]
+    print(list)
+    if estimate_G_ratio == True:
+        for i in range(1,N):
+            G_list=G_list+[ list[i] / list[i-1] ]
+        print(G_list)
+
+
 #GCD algorithms, EA, EEA, , return GCD, EEA also returns bezout identity as a list
 
 def brute_force_GCD(X,Y,Show_working=True):
