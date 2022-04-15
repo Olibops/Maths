@@ -1,3 +1,14 @@
+#general maths functions that really shouldn't be missing
+
+def sign(X):
+    if X == 0:
+        Sign=0
+    else:
+        Sign = int(abs(X)//X)
+    return Sign
+
+#Algorithms for finding "special numbers"
+
 def create_N_pythagorean_triples(N=1):
     
     for i in range(N + 1):
@@ -24,14 +35,7 @@ def create_N_pythagorean_triples(N=1):
     for i in range(N):
         print(Storage_List[i])
 
-def sign(X):
-    if X == 0:
-        Sign=0
-    else:
-        Sign = int(abs(X)//X)
-    return Sign
-
-def inefficient_create_N_pythagorean_triples(N=1):
+def brute_force_N_pythagorean_triples(N=1):
     def pythagorean_triple_search(N=1):
         Storage_List=[]
         for i in range(1,N):
