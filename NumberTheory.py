@@ -1,4 +1,7 @@
+#learn doc strings
+
 #general maths functions that really shouldn't be missing
+
 
 def sign(X):
     if X == 0:
@@ -17,6 +20,7 @@ def N_pythagorean_triples(N=1):
             break
 
     Storage_List=[]
+
     for i in range(1,x+2):
         for j in range(i,x+2):
             a=abs(i ** 2 - j ** 2)
@@ -60,16 +64,25 @@ def brute_force_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
-def N_fibonacchi(N,estimate_G_ratio=True):
-    list=[1,1]
-    G_list=[]
-    for i in range(N):
-        list = list + [ list[-1] + list[-2] ]
-    print(list)
-    if estimate_G_ratio == True:
+def N_fibonacchi_and_G_ratio(N,estimate_G_ratio=True):
+
+    def produce_fibonacchi(N):
+        list=[1,1]
+        for i in range(N):
+            list = list + [ list[-1] + list[-2] ]
+        print(list)
+        return list
+
+    def estimate_golden_ratio(list,estimate_G_ratio=True):
+        G_list=[]
         for i in range(1,N):
             G_list=G_list+[ list[i] / list[i-1] ]
         print(G_list)
+
+    
+    list=produce_fibonacchi(N)
+    if estimate_G_ratio == True:
+        estimate_golden_ratio(list)
 
 
 #GCD algorithms, EA, EEA, , return GCD, EEA also returns bezout identity as a list
