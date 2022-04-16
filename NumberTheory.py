@@ -2,6 +2,9 @@ import math
 
 # TODO: doc strings
 # TODO: to work with math package
+# TODO: get rid of capitalisation, its only necessary for classes. Learn Blacklist
+# TODO: PEP8
+# TODO: Make generators
 
 #general maths functions that really shouldn't be missing
 
@@ -68,16 +71,18 @@ def brute_force_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
-def N_fibonacchi_and_G_ratio(N,estimate_G_ratio=True):
-
+def n_fibonacchi_and_golden_ratio(N,estimate_G_ratio=True):
+    
+    # TODO: Update to work with any list of 2
+    
     def produce_fibonacchi(N):
-        list=[1,1]
+        list=[0,1]
         for i in range(N):
             list = list + [ list[-1] + list[-2] ]
         print(list)
         return list
 
-    def estimate_golden_ratio(list,estimate_G_ratio=True):
+    def estimate_golden_ratio(list):
         G_list=[]
         for i in range(1,N):
             G_list=G_list+[ list[i] / list[i-1] ]
