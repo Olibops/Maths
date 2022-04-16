@@ -1,6 +1,10 @@
-#learn doc strings
+import math
+
+# TODO: doc strings
+# TODO: to work with math package
 
 #general maths functions that really shouldn't be missing
+
 
 
 def sign(X):
@@ -79,8 +83,8 @@ def N_fibonacchi_and_G_ratio(N,estimate_G_ratio=True):
             G_list=G_list+[ list[i] / list[i-1] ]
         print(G_list)
 
-    
     list=produce_fibonacchi(N)
+    
     if estimate_G_ratio == True:
         estimate_golden_ratio(list)
 
