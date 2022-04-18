@@ -2,13 +2,12 @@ import math
 
 # TODO: doc strings
 # TODO: to work with math package
+# TODO: Modularise
 # TODO: get rid of capitalisation, its only necessary for classes. Learn Blacklist
 # TODO: PEP8
 # TODO: Make generators
 
 #general maths functions that really shouldn't be missing
-
-
 
 def sign(X):
     if X == 0:
@@ -19,7 +18,7 @@ def sign(X):
 
 #Algorithms for finding "special numbers"
 
-def N_pythagorean_triples(N=1):
+def list_N_pythagorean_triples(N=1):
     
     for i in range(N + 1):
         if (1 + i) * i /2 >= N:
@@ -46,7 +45,7 @@ def N_pythagorean_triples(N=1):
     for i in range(N):
         print(Storage_List[i])
 
-def brute_force_N_pythagorean_triples(N=1):
+def list_brute_force_N_pythagorean_triples(N=1):
     def pythagorean_triple_search(N=1):
         Storage_List=[]
         for i in range(1,N):
@@ -71,25 +70,25 @@ def brute_force_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
-def n_fibonacchi_and_golden_ratio(N,estimate_G_ratio=True):
+def list_n_fibonacchi_and_golden_ratio(N,estimate_G_ratio=True):
     
     # TODO: Update to work with any list of 2
     
     def produce_fibonacchi(N):
         list=[0,1]
         for i in range(N):
-            list = list + [ list[-1] + list[-2] ]
-        print(list)
+            list = list + [list[-1] + list[-2] ]
         return list
 
     def estimate_golden_ratio(list):
         G_list=[]
         for i in range(1,N):
-            G_list=G_list+[ list[i] / list[i-1] ]
+            G_list = G_list + [list[i] / list[i-1] ]
         print(G_list)
 
     list=produce_fibonacchi(N)
-    
+    print(list)
+
     if estimate_G_ratio == True:
         estimate_golden_ratio(list)
 
@@ -191,7 +190,7 @@ def least_common_multiple(N=1,M=2,Show_Working=False):
         print(LCM)
     return LCM
 
-def linear_diophantine(a=1,b=1,c=1,Show_Working=False): #Not finished
+def linear_diophantine(a=1,b=1,c=1,Show_Working=False): 
     #Find x,y such that ax+by=c
     if Show_Working==True:
         print("First we calculate the GCD, and Bezout Identities of " + str(abs(a)) + " and " + str(abs(b)) + " with the Euclidean Algorithm")
@@ -217,9 +216,13 @@ def linear_diophantine(a=1,b=1,c=1,Show_Working=False): #Not finished
         else:
             print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
 
-def solve_linear_congruence(a=1,c=1,n=1,Show_Working=True): #aX=c mod n
+def solve_linear_congruence(a=1,c=1,n=1,Show_Working=True): 
+    #aX=c mod n
     if Show_Working==True:
-        print("To solve an modular congruence of the form " + str(a) + "X = " + str(c) + " mod " + str(n) + " note it can be rephrased as the linear Diophantine equation:")
+
+        print("To solve an modular congruence of the form " 
+                + str(a) + "X = " + str(c) + " mod " + str(n) +
+             " note it can be rephrased as the linear Diophantine equation:")
         print(str(a) + "X + " + str(-n) + "Y = " + str(c) )
         print("which can be solved with the following method:")
     
