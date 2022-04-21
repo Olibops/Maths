@@ -1,4 +1,24 @@
-def create_N_pythagorean_triples(N=1):
+import math
+
+# TODO: doc strings
+# TODO: to work with math package
+# TODO: Modularise
+# TODO: get rid of capitalisation, its only necessary for classes. Learn Blacklist
+# TODO: PEP8
+# TODO: Make generators
+
+#general maths functions that really shouldn't be missing
+
+def sign(X):
+    if X == 0:
+        Sign=0
+    else:
+        Sign = int(abs(X)//X)
+    return Sign
+
+#Algorithms for finding "special numbers"
+
+def list_N_pythagorean_triples(N=1):
     
     for i in range(N + 1):
         if (1 + i) * i /2 >= N:
@@ -6,6 +26,7 @@ def create_N_pythagorean_triples(N=1):
             break
 
     Storage_List=[]
+
     for i in range(1,x+2):
         for j in range(i,x+2):
             a=abs(i ** 2 - j ** 2)
@@ -24,14 +45,7 @@ def create_N_pythagorean_triples(N=1):
     for i in range(N):
         print(Storage_List[i])
 
-def sign(X):
-    if X == 0:
-        Sign=0
-    else:
-        Sign = int(abs(X)//X)
-    return Sign
-
-def inefficient_create_N_pythagorean_triples(N=1):
+def list_brute_force_N_pythagorean_triples(N=1):
     def pythagorean_triple_search(N=1):
         Storage_List=[]
         for i in range(1,N):
@@ -56,7 +70,41 @@ def inefficient_create_N_pythagorean_triples(N=1):
     for i in range(N):
         print(triples[i])
 
+def list_n_fibonacchi_and_golden_ratio(N,estimate_G_ratio=True):
+    
+    # TODO: Update to work with any list of 2
+    
+    def produce_fibonacchi(N):
+        list=[0,1]
+        for i in range(N):
+            list = list + [list[-1] + list[-2] ]
+        return list
+
+    def estimate_golden_ratio(list):
+        G_list=[]
+        for i in range(1,N):
+            G_list = G_list + [list[i] / list[i-1] ]
+        print(G_list)
+
+    list=produce_fibonacchi(N)
+    print(list)
+
+    if estimate_G_ratio == True:
+        estimate_golden_ratio(list)
+
+
 #GCD algorithms, EA, EEA, , return GCD, EEA also returns bezout identity as a list
+
+def brute_force_GCD(X,Y,Show_working=True):
+
+    x=0
+
+    test_range=range(1, int(min(X,Y)) +1 )
+
+    for i in test_range:
+        if X % i == 0 and Y % i == 0:
+            x=i
+    print(x)
 
 def euclidean_algorithm(M=2,N=1,Show_Working=False): #Returns GCD
     a_n,b_n=max(abs(M),abs(N)),min(abs(M),abs(N))
@@ -72,6 +120,7 @@ def euclidean_algorithm(M=2,N=1,Show_Working=False): #Returns GCD
         print("GCD(" + str(M) + "," + str(N) + ")=" + str(a_n))
 
     return a_n
+
 
 def extended_euclidean_algorithm(N=1,M=2,Show_Working=False):
 
@@ -121,6 +170,51 @@ def extended_euclidean_algorithm(N=1,M=2,Show_Working=False):
 
         return [a_n, N_sign * Bezout_b[-2], M_sign * Bezout_a[-2]]
 
+def dijkstras_GCD(X,Y,Show_Working=False):
+    while X != Y:
+        X, Y = max(abs(X - Y),Y), min(abs(X - Y),Y)
+        if Show_Working == True:
+            print(X,Y)
+    print(X)
+
+def function(X=1,Y=1,Show_Working=False):
+    
+    counter = 0
+    
+    def steins_GCD_method(X,Y,Show_Working=False):
+        global counter
+        X, Y = abs(X), abs(Y)
+
+        if X == 0 or Y == 0:
+            print(max(X,Y))
+            breakpoint
+
+        while X % 2 ==0 and Y % 2 ==0:
+            counter+=1
+            X, Y = X // 2, Y // 2
+            print(X,Y)
+            if X==1 or Y==1:
+                print(max(X,Y))
+                print(counter)
+                break
+
+        while X % 2 ==0:
+            X = X // 2
+            
+        while Y % 2 ==0:
+            Y = Y // 2
+            
+        X, Y = abs(X-Y)//2, min(X,Y)
+        print(X,Y)
+        
+        if X==Y or X==0 or Y==0:
+            print(max(X,Y)*(2**counter))
+            counter=0
+        else:
+            steins_GCD_method(X,Y)
+    
+    steins_GCD_method(X,Y,Show_Working)
+
 #Corollaries from GCDs
 
 def least_common_multiple(N=1,M=2,Show_Working=False):
@@ -134,7 +228,7 @@ def least_common_multiple(N=1,M=2,Show_Working=False):
         print(LCM)
     return LCM
 
-def linear_diophantine(a=1,b=1,c=1,Show_Working=False): #Not finished
+def linear_diophantine(a=1,b=1,c=1,Show_Working=False): 
     #Find x,y such that ax+by=c
     if Show_Working==True:
         print("First we calculate the GCD, and Bezout Identities of " + str(abs(a)) + " and " + str(abs(b)) + " with the Euclidean Algorithm")
@@ -160,58 +254,19 @@ def linear_diophantine(a=1,b=1,c=1,Show_Working=False): #Not finished
         else:
             print(str(a) + "x" + "+" + str(b) + "y=" + str(c) + " is not solveable because " + str(GCD) + "∤" + str(c) )
 
-def solve_linear_congruence(a=1,c=1,n=1,Show_Working=True): #aX=c mod n
+def solve_linear_congruence(a=1,c=1,n=1,Show_Working=True): 
+    #aX=c mod n
     if Show_Working==True:
-        print("To solve an modular congruence of the form " + str(a) + "X = " + str(c) + " mod " + str(n) + " note it can be rephrased as the linear Diophantine equation:")
+
+        print("To solve an modular congruence of the form " 
+                + str(a) + "X = " + str(c) + " mod " + str(n) +
+             " note it can be rephrased as the linear Diophantine equation:")
         print(str(a) + "X + " + str(-n) + "Y = " + str(c) )
         print("which can be solved with the following method:")
     
     X=linear_diophantine(a,-n,c,Show_Working)
     if X==False:
         print("Therefore "+ str(a) + "X = " + str(c) + " mod " + str(n) + " is not solveable")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
